@@ -7,18 +7,18 @@
 
 <script>
 import { ref } from 'vue'
-const workTime = ref(10)
-const chillTime = ref(5)
-const longChillTime = ref(15)
-const round = ref(1)
 export default {
     data() {
-        return {
-            relaxTime: false,
-            running: false,
-            timerCount: workTime.value,
-            alarm: new Audio('/alarm.mp3'),
-            intervallId: null
+        return {                           
+        timerCount: 10,
+        workTimeValue: 10,
+        chillTimeValue: 5,
+        longChillTimeValue: 15,
+        round: 1,
+        relaxTime: false,
+        running: false,
+        intervalId: null, 
+        alarm: new Audio('/alarm.mp3'),
         }
     },
     methods: {
@@ -43,7 +43,6 @@ export default {
             this.intervalId = null; // Reset interval ID
         },
         playpause() {
-            console.log(this.running)
             if (this.running) {
                 this.stopTimer()
             }else{
@@ -51,26 +50,26 @@ export default {
             }
         },
         breakTime() {
-            console.log(round.value)
+            console.log(this.round)
             this.relaxTime = true
             this.running = false
-            if (round.value % 4 == 0) { // Check if time for big break
+            if (this.round % 4 == 0) { // Check if time for big break
                 console.log('long breaky time')
-                this.timerCount = longChillTime.value
+                this.timerCount = this.longChillTimeValue
             } else {
-                this.timerCount = chillTime.value
+                this.timerCount = this.chillTimeValue
             }
         },
         workyTime() {
             this.relaxTime = false;
             this.running = false;
-            this.timerCount = workTime.value
+            this.timerCount = this.workTimeValue
         },
         timeEndHandler() {
             // this.alarm.play()
             this.stopTimer()
             if (this.relaxTime) {
-                round.value++
+                this.round++
                 this.workyTime()
             } else {
                 this.breakTime()
