@@ -6,11 +6,11 @@
 </template>
 
 <script>
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 const workTime = ref(10)
 const chillTime = ref(5)
 const longChillTime = ref(15)
-const round = ref(4)
+const round = ref(1)
 export default {
     data() {
         return {
@@ -51,6 +51,7 @@ export default {
             }
         },
         breakTime() {
+            console.log(round.value)
             this.relaxTime = true
             this.running = false
             if (round.value % 4 == 0) { // Check if time for big break
@@ -62,11 +63,12 @@ export default {
         },
         workyTime() {
             this.relaxTime = false;
-            this.running = false
+            this.running = false;
             this.timerCount = workTime.value
         },
         timeEndHandler() {
             // this.alarm.play()
+            this.stopTimer()
             if (this.relaxTime) {
                 round.value++
                 this.workyTime()
