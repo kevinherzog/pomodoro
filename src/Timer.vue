@@ -3,7 +3,7 @@
         <h1 v-if="!relaxTime">Worky Time</h1>
         <h1 v-else>Breaky Time</h1>
     </div>
-    <div>{{ timerCount }}</div>
+    <div>{{ minutes }}:{{ seconds.toString().padStart(2, '0') }}</div>
     <button v-on:click="playpause">Play/Pause</button>
     <button v-on:click="skip">Skip</button>
     <button v-on:click="addOneMin">+1</button>
@@ -18,10 +18,10 @@ export default {
     data() {
         return {  
             minuteLength: 60,                      
-            timerCount: 10,
-            workTimeValue: 10,
-            chillTimeValue: 5,
-            longChillTimeValue: 15,
+            workTimeValue: (60 * 25),
+            timerCount: (60 * 25)  ,
+            chillTimeValue: (60 * 5),
+            longChillTimeValue: (60 * 15) ,
             round: 1,
             relaxTime: false,
             running: false,
@@ -74,7 +74,7 @@ export default {
             this.timerCount = this.workTimeValue
         },
         timeEndHandler() {
-            // this.alarm.play()
+            this.alarm.play()
             this.stopTimer()
             if (this.relaxTime) {
                 this.round++
@@ -148,6 +148,14 @@ export default {
                 this.timerCount = this.timerCount - this.minuteLength
             }
         }
-    }
+    },  
+    computed: {
+        minutes() {
+            return Math.floor(this.timerCount / 60);
+        },
+        seconds() {
+            return this.timerCount % 60;
+        }
+  },
 }
 </script>
