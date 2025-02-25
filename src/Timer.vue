@@ -1,20 +1,24 @@
+
+
 <template>
-    <div>
+    <div class="bg-slate-800 place-self-center text-3xl text-white">
         <h1 v-if="!relaxTime">Worky Time</h1>
         <h1 v-else>Breaky Time</h1>
     </div>
-    <div>{{ minutes }}:{{ seconds.toString().padStart(2, '0') }}</div>
-    <button v-on:click="playpause">Play/Pause</button>
-    <button v-on:click="skip">Skip</button>
-    <button v-on:click="addOneMin">+1</button>
-    <button v-on:click="addFiveMin">+5</button>
-    <button v-on:click="subOneMin">-1</button>
-    <button v-on:click="subFiveMin">-5</button>
+    <div class="place-self-center text-white">{{ minutes }}:{{ seconds.toString().padStart(2, '0') }}</div>
+    <div class="flexbox place-self-center">
+        <button class="btn m-4" v-on:click="playpause">Play/Pause</button>
+        <button class="btn m-4" v-on:click="skip">Skip</button>
+        <button class="btn m-4" v-on:click="addOneMin">+1</button>
+        <button class="btn m-4" v-on:click="addFiveMin">+5</button>
+        <button class="btn m-4" v-on:click="subOneMin">-1</button>
+        <button class="btn m-4" v-on:click="subFiveMin">-5</button>
+    </div>
 
 </template>
 
 <script>
-export default {
+export default { 
     data() {
         return {  
             minuteLength: 60,                      
