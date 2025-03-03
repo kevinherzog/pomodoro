@@ -1,18 +1,18 @@
 
 
 <template>
-    <div class="bg-slate-800 place-self-center text-3xl text-white">
+    <div class="place-self-center text-3xl text-white">
         <h1 v-if="!relaxTime">Worky Time</h1>
         <h1 v-else>Breaky Time</h1>
     </div>
-    <div class="place-self-center text-white">{{ minutes }}:{{ seconds.toString().padStart(2, '0') }}</div>
-    <div class="flexbox place-self-center">
-        <button class="btn m-4" v-on:click="playpause">Play/Pause</button>
-        <button class="btn m-4" v-on:click="skip">Skip</button>
-        <button class="btn m-4" v-on:click="addOneMin">+1</button>
-        <button class="btn m-4" v-on:click="addFiveMin">+5</button>
-        <button class="btn m-4" v-on:click="subOneMin">-1</button>
-        <button class="btn m-4" v-on:click="subFiveMin">-5</button>
+    <div class="text-9xl place-self-center text-white my-20">{{ minutes }}:{{ seconds.toString().padStart(2, '0') }}</div>
+    <div class="grid grid-cols-4 gap-2 w-96 place-self-center">
+            <button class="btn col-span-2" v-on:click="playpause">Play/Pause</button>
+            <button class="btn col-span-2" v-on:click="skip">Skip</button>
+            <button class="btn" v-on:click="subFiveMin">-5</button>
+            <button class="btn" v-on:click="subOneMin">-1</button>
+            <button class="btn" v-on:click="addOneMin">+1</button>
+            <button class="btn" v-on:click="addFiveMin">+5</button>
     </div>
 
 </template>
@@ -159,7 +159,24 @@ export default {
         },
         seconds() {
             return this.timerCount % 60;
+        },
+        bgColor(){
+            return (this.relaxTime ? "bg-slate-700":"bg-red-950")
         }
   },
+  watch: {
+    bgColor(newBg, oldBG){
+        document.body.classList.remove(oldBG);
+        document.body.classList.add(newBg);
+        console.log(newBg)
+        console.log(oldBG)
+    }
+  },
+  mounted() {
+    document.body.classList.add(this.bgColor);
+  },
+  beforeUnmount() {
+    document.body.classList.remove(this.bgColor); 
+  }
 }
 </script>

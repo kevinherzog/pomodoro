@@ -11,6 +11,10 @@
   .btn:disabled {
     @apply bg-gray-400 cursor-not-allowed;
   }
-body{
-    @apply bg-slate-700;
+:root {
+  --bg-color: bg-red-950;
+}
+@theme static {
+  --color-primary: var(bg-red-950);
+  --color-secondary: var(bg-slate-700);
 }

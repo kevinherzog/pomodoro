@@ -4,7 +4,7 @@ import Timer from './Timer.vue'
 </script>
 
 <template>
-  <div class="bg-slate-700">
+  <div class="w-full h-screen place-content-center">
     <Timer />
   </div>
 </template>
